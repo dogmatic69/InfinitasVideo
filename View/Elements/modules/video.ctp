@@ -38,7 +38,7 @@
         <div class="video"><?php echo $videoHtml; ?></div>
 		<div class="image">
 			<?php 
-				echo $this->Html->image($video['InfinitasVideo']['content_image_path_full'], array('width' => $size[0], 'height' => $size[1])); 
+				echo $this->Html->image($video['InfinitasVideo']['content_image_path_full'], array('width' => $size[0], 'height' => $size[1] + 1)); 
 			?>
 		</div>
     </div>
