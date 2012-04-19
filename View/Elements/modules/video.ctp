@@ -34,12 +34,16 @@
 	}
 ?>
 <div class="top_left grid_6 alpha">
-    <div class="inner">
+    <div class="inner play">
         <div class="video"><?php echo $videoHtml; ?></div>
 		<div class="image">
 			<?php 
 				echo $this->Html->image($video['InfinitasVideo']['content_image_path_full'], array('width' => $size[0], 'height' => $size[1] + 1)); 
 			?>
+			<div class="description">
+				<h2 class="white">Video</h2>
+				<h2><?php echo $video['InfinitasVideo']['name']; ?></h2>
+			</div>
 		</div>
     </div>
     <div class="breadcrumb">
