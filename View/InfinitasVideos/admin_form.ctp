@@ -25,5 +25,9 @@
 		echo $this->Form->input('name');
 		echo $this->Form->input('url');
 		echo $this->Form->input('preview', array('type' => 'file'));
+		
+		echo $this->Form->input('plugin', array('type' => 'select', 'class' => "ajaxSelectPopulate {url:{action:'getModels'}, target:'InfinitasVideoModel'}"));
+		echo $this->Form->input('model', array('type' => 'select', 'class' => "ajaxSelectPopulate {url:{action:'getRecords'}, target:'InfinitasVideoForeignKey'}"));
+		echo $this->Form->input('foreign_key', array('type' => 'select', 'label' => __d('videos', 'Record')));
     echo $this->Form->end(); ?>
 </div>

@@ -9,4 +9,10 @@
 				'dashboard' => array('plugin' => 'videos', 'controller' => 'infinitas_videos', 'action' => 'index'),
 			);
 		}
+		
+		public function onRequireComponentsToLoad($event = null) {
+			return array(
+				'Videos.InfinitasVideoLoader'
+			);
+		}
 	}

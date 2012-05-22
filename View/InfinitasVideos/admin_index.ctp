@@ -51,8 +51,27 @@
 				<tr class="<?php echo $this->Infinitas->rowClass(); ?>">
 					<td><?php echo $this->Infinitas->massActionCheckBox($infinitasVideo); ?>&nbsp;</td>
 					<td><?php echo $this->Html->adminQuickLink($infinitasVideo['InfinitasVideo']); ?>&nbsp;</td>
-					<td><?php echo sprintf('module:Videos.video#%s=100x100', $infinitasVideo['InfinitasVideo']['slug']); ?>&nbsp;</td>
-					<td><?php echo $infinitasVideo['InfinitasVideo']['url']; ?>&nbsp;</td>
+					<td>
+						<?php 
+							echo $this->Html->link(
+								sprintf('[module:Videos.video#%s=100x100]', $infinitasVideo['InfinitasVideo']['slug']),
+								$infinitasVideo['InfinitasVideo']['content_title'],
+								array(
+									'target' => '_blank'
+								)
+							);
+						?>&nbsp;
+					</td>
+					<td>
+						<?php
+							if($infinitasVideo['InfinitasVideo']['content_title']) {
+								echo $infinitasVideo['InfinitasVideo']['content_title'];
+							}
+							else {
+								echo '-';
+							}
+						?>&nbsp;
+					</td>
 					<td><?php echo $infinitasVideo['InfinitasVideo']['preview']; ?>&nbsp;</td>
 					<td><?php echo CakeTime::niceShort($infinitasVideo['InfinitasVideo']['modified']);?>&nbsp;</td>
 				</tr> <?php

@@ -98,4 +98,47 @@
 			
 			return (array)current($results);
 		}
+		
+		public function relatedVideo($slug) {
+			$slug = array_merge(
+				array('plugin' => null, 'model' => null, 'slug' => null, 'id' => null),
+				(array)$slug
+			);
+			$id = ClassRegistry::init('Contents.GlobalContent')->find(
+				'list',
+				array(
+					'fields' => array(
+						'GlobalContent.foreign_key',
+						'GlobalContent.foreign_key'
+					),
+					'conditions' => array(
+						'GlobalContent.model' => sprintf('%s.%s', $slug['plugin'], $slug['model']),
+						'or' => array(
+							'GlobalContent.slug' => $slug['slug'],
+							'GlobalContent.foreign_key' => $slug['id'],
+						)
+					)
+				)
+			);
+			
+			if(empty($id)) {
+				return array();
+			}
+			
+			$video = $this->find(
+				'list',
+				array(
+					'fields' => array(
+						$this->alias . '.' . $this->primaryKey,
+						$this->alias . '.slug',
+					),
+					'conditions' => array(
+						$this->alias . '.model' => sprintf('%s.%s', $slug['plugin'], $slug['model']),
+						$this->alias . '.foreign_key' => current($id)
+					)
+				)
+			);
+			
+			return current($video);
+		}
 	}
