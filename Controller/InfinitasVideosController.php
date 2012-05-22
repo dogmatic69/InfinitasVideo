@@ -83,18 +83,19 @@
 			}
 			parent::admin_edit($id);
 
-			pr($this->request->data[$this->modelClass]['model']);
-			list(
-				$this->request->data[$this->modelClass]['plugin'], 
-				$this->request->data[$this->modelClass]['model']
-			) = pluginSplit($this->request->data[$this->modelClass]['model']);
-			
-			$plugins = $this->{$this->modelClass}->getPlugins();			
-			$models = $this->{$this->modelClass}->getModels($this->request->data[$this->modelClass]['plugin']);
-			$records = $this->{$this->modelClass}->getRecords(
-				$this->request->data[$this->modelClass]['plugin'], 
-				$this->request->data[$this->modelClass]['model']
-			);
+			$plugins = $this->{$this->modelClass}->getPlugins();
+			if(!empty($this->request->data[$this->modelClass]['model'])) {
+				list(
+					$this->request->data[$this->modelClass]['plugin'], 
+					$this->request->data[$this->modelClass]['model']
+				) = pluginSplit($this->request->data[$this->modelClass]['model']);
+
+				$models = $this->{$this->modelClass}->getModels($this->request->data[$this->modelClass]['plugin']);
+				$records = $this->{$this->modelClass}->getRecords(
+					$this->request->data[$this->modelClass]['plugin'], 
+					$this->request->data[$this->modelClass]['model']
+				);
+			}
 			$this->set(compact('plugins', 'models', 'records'));
 		}
 	}
