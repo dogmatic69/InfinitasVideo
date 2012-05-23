@@ -70,7 +70,7 @@
 		public function admin_add() {
 			parent::admin_add();
 			
-			$this->set('plugins', $this->getPlugins());
+			$this->set('plugins', $this->{$this->modelClass}->getPlugins());
 		}
 		
 		public function admin_edit($id = null) {
