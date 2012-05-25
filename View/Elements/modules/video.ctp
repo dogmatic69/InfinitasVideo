@@ -32,8 +32,13 @@
 			throw new Exception('Unknown video source');
 			break;
 	}
+	
+	$grid = 6;
+	if($this->layout == 'full_width') {
+		$grid += 2;
+	}
 ?>
-<div class="top_left grid_6 alpha">
+<div class="top_left grid_<?php echo $grid; ?> alpha">
     <div class="inner play">
         <div class="video"><?php echo $videoHtml; ?></div>
 		<div class="image">
