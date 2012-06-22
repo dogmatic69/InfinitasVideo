@@ -10,7 +10,7 @@
 		 * @var string
 		 */
 		public $displayField = 'name';
-		
+
 		/**
 		 * Validation rules
 		 *
@@ -31,14 +31,14 @@
 				)
 			)
 		);
-		
+
 		public $findMethods = array(
 			'video' => true
 		);
-		
+
 		public function __construct($id = false, $table = null, $ds = null) {
 			parent::__construct($id, $table, $ds);
-			
+
 			$this->validate = array(
 				'name' => array(
 					'notempty' => array(
@@ -64,7 +64,7 @@
 				)
 			);
 		}
-		
+
 		protected function _findVideo($state, $query, $results = array()) {
 			if ($state === 'before') {
 				if(empty($query[0])) {
@@ -76,7 +76,7 @@
 					array('alias' => $this->alias)
 				);
 				$fields[] = 'content_image_path_full';
-				
+
 				foreach($this->actsAs['Filemanager.Upload']['preview']['thumbnailSizes'] as $name => $size) {
 					$this->virtualFields['content_image_path_' . $name] = String::insert(
 						'IF((:alias.preview = "" OR :alias.preview IS NULL), "/contents/img/no-image.png", CONCAT("/files/infinitas_video/preview/", :alias.dir, "/", "' . $name . '_", :alias.preview))',
@@ -84,21 +84,21 @@
 					);
 					$fields[] = 'content_image_path_' . $name;
 				}
-				
+
 				$query['conditions'] = array(
 					$this->alias . '.slug' => $query[0]
 				);
-				
+
 				$query['fields'] = $fields;
 				$query['limit'] = 1;
-				
+
 				unset($query[0]);
 				return $query;
 			}
-			
+
 			return (array)current($results);
 		}
-		
+
 		public function relatedVideo($slug) {
 			$slug = array_merge(
 				array('plugin' => null, 'model' => null, 'slug' => null, 'id' => null),
@@ -120,11 +120,11 @@
 					)
 				)
 			);
-			
+
 			if(empty($id)) {
 				return array();
 			}
-			
+
 			$video = $this->find(
 				'list',
 				array(
@@ -138,7 +138,7 @@
 					)
 				)
 			);
-			
+
 			return current($video);
 		}
 	}

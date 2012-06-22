@@ -4,13 +4,13 @@
 		$video = ClassRegistry::init('Videos.InfinitasVideo')->find('video', $video);
 	}
 	catch(Exception $e) {}
-	
+
 	if(empty($video)) {
 		return false;
 	}
-	
+
 	$size = explode('x', $size);
-	
+
 	switch(true) {
 		case strstr($video['InfinitasVideo']['url'], 'youtube'):
 			$url = parse_url($video['InfinitasVideo']['url']);
@@ -18,7 +18,7 @@
 
 			$videoHtml = sprintf('<iframe width="%d" height="%d" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen=""></iframe>', $size[0], $size[1], $url['v']);
 			break;
-		
+
 		case strstr($video['InfinitasVideo']['url'], 'vimeo'):
 			$url = explode('/', $video['InfinitasVideo']['url']);
 			$url = array_pop($url);
@@ -27,14 +27,14 @@
 				$url, $size[0], $size[1]
 			);
 			break;
-		
+
 		default:
 			throw new Exception('Unknown video source');
 			break;
 	}
-	
+
 	$grid = 6;
-	if($this->layout == 'full_width') {
+	if($this->layout == 'full_width' || $this->request->params['controller'] == 'global_categories') {
 		$grid += 2;
 	}
 ?>
@@ -42,8 +42,8 @@
     <div class="inner play">
         <div class="video"><?php echo $videoHtml; ?></div>
 		<div class="image">
-			<?php 
-				echo $this->Html->image($video['InfinitasVideo']['content_image_path_full'], array('width' => $size[0], 'height' => $size[1] + 1)); 
+			<?php
+				echo $this->Html->image($video['InfinitasVideo']['content_image_path_full'], array('width' => $size[0], 'height' => $size[1] + 1));
 			?>
 			<div class="description">
 				<h2 class="white">Video</h2>
