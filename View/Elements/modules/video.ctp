@@ -46,8 +46,10 @@
 				echo $this->Html->image($video['InfinitasVideo']['content_image_path_full'], array('width' => $size[0], 'height' => $size[1] + 1));
 			?>
 			<div class="description">
-				<h2 class="white">Video</h2>
-				<h2><?php echo $video['InfinitasVideo']['name']; ?></h2>
+				<?php
+					$name = explode(' ', $video['InfinitasVideo']['name'], 2);
+					echo sprintf('<h2 class="white">%s</h2><h2>%s</h2>', $name[0], $name[1]);
+				?>
 			</div>
 		</div>
     </div>
