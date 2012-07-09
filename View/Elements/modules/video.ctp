@@ -48,6 +48,7 @@
 			<div class="description">
 				<?php
 					$name = explode(' ', $video['InfinitasVideo']['name'], 2);
+					$name[1] = !empty($name[1]) ? $name[1] : '';
 					echo sprintf('<h2 class="white">%s</h2><h2>%s</h2>', $name[0], $name[1]);
 				?>
 			</div>
